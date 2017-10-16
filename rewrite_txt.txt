@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 world more software resources are developed and more software time is
+=======
+world more software resources are developed and more software time a
+>>>>>>> origin/psx

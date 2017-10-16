@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.*;
 import java.util.Random;
 import java.awt.Desktop;
-
+/*hello*/
 public class gui  {
 	static JFrame frame= new JFrame();
 	static int max_str=1024;

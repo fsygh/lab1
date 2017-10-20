@@ -6,10 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.*;
 import java.util.*;
-import java.util.Random;
 import java.awt.Desktop;
-
-public class gui  {
+/
+public class gui  {         /** {@inheritDoc} */
 	static JFrame frame= new JFrame();
 	static int max_str=1024;
 	static Graph G = new Graph();
@@ -19,33 +18,33 @@ public class gui  {
 		gui.start();
 	}
 	
-	public void start() {
+  public void start() { /** {@inheritDoc} */
 		
-		GUIPanel panel= new GUIPanel();
-		frame.add(panel);
-		frame.setTitle("GUI PANEL");
-		frame.setSize(800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();  
-        int width = 800;  
-        int height = 600;  
-        frame.setBounds((d.width - width) / 2, (d.height - height) / 2, width, height);  
+     GUIPanel panel= new GUIPanel();
+     frame.add(panel);
+	 frame.setTitle("GUI PANEL");
+     frame.setSize(800, 600);
+	 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     frame.setVisible(true);
+     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();  
+     int width = 800;  
+     int height = 600;  
+     frame.setBounds((d.width - width) / 2, (d.height - height) / 2, width, height);  
 		
 	}
     static int Is_exist(Graph G, int v1, int v2) {
         EdgeNode p = new EdgeNode();
         p = G.node_list[v1].first_edge;
 
-        while (p != null) {
-            if (p.vertex == v2) {
-                p.weight++;
+    while (p != null) {
+         if (p.vertex == v2) {
+             p.weight++;
 
-                return 1;
-            }
+              return 1;
+          }
 
-            p = p.next;
-        }
+          p = p.next;
+     }
 
         return -1;
     }
@@ -59,12 +58,12 @@ public class gui  {
 
         while (lt.hasNext()) {
             G.node_list[G.vertex_num] = new VertexNode();
-            G.node_list[G.vertex_num].data = (lt.next()).toString();
+            G.node_list[G.vertex_num].date = (lt.next()).toString();
             G.node_list[G.vertex_num].first_edge = null;
             G.vertex_num++;
         }
 
-        for (int i = 0; i < (str_all.length - 1); i++) {
+    for (int i = 0; i < (str_all.length - 1); i++) {
             EdgeNode p = new EdgeNode();
             int v1 = locate_vex(G, str_all[i]);
             int v2 = locate_vex(G, str_all[i + 1]);
@@ -81,9 +80,9 @@ public class gui  {
         }
     }
 
-    static public int locate_vex(Graph G, String s) {
+    public static int locate_vex(Graph G, String s) { /** {@inheritDoc} */
         for (int i = 0; i < G.vertex_num; i++) {
-            if (G.node_list[i].data.equals(s)) {
+            if (G.node_list[i].date.equals(s)) {
                 return i;
             }
         }
@@ -95,20 +94,20 @@ public class gui  {
         EdgeNode p = new EdgeNode();
 
         for (int i = 0; i < G.vertex_num; i++) {
-            System.out.print(G.node_list[i].data);
+            System.out.print(G.node_list[i].date);
 
             p = G.node_list[i].first_edge;
 
             while (p != null) {
-                System.out.print("->" + G.node_list[p.vertex].data);
+                System.out.print("->" + G.node_list[p.vertex].date);
                 p = p.next;
             }
 
             System.out.println();
         }
     }
-
-    static public String[] findBridgeWords(Graph G, String word1, String word2,
+    /** {@inheritDoc} */
+    public static String[] findBridgeWords(Graph G, String word1, String word2,  
         int[] num_word) {
         int locate_word1 = locate_vex(G, word1);
         String[] tmp = new String[G.vertex_num];
@@ -118,12 +117,12 @@ public class gui  {
         p = G.node_list[locate_word1].first_edge;
 
         while (p != null) {
-            int locate_1 = locate_vex(G, G.node_list[p.vertex].data);
+            int locate_1 = locate_vex(G, G.node_list[p.vertex].date);
             q = G.node_list[locate_1].first_edge;
 
             while (q != null) {
-                if (G.node_list[q.vertex].data.equals(word2)) {
-                    tmp[num_word[0]++] = G.node_list[p.vertex].data;
+                if (G.node_list[q.vertex].date.equals(word2)) {
+                    tmp[num_word[0]++] = G.node_list[p.vertex].date;
                 }
 
                 q = q.next;
@@ -134,10 +133,10 @@ public class gui  {
 
         return tmp;
     }
-
-    static public String queryBridgeWords(Graph G, String word1, String word2) {
-        int locate_word1 = locate_vex(G, word1);
-        int locate_word2 = locate_vex(G, word2);
+    /** {@inheritDoc} */
+  public static String queryBridgeWords(Graph G, String word1, String word2) {
+      int locate_word1 = locate_vex(G, word1);
+      int locate_word2 = locate_vex(G, word2);
 
         if ((locate_word1 == -1) || (locate_word2 == -1)) {
             if ((locate_word1 == -1) && (locate_word2 != -1)) {
@@ -152,15 +151,15 @@ public class gui  {
             String[] tmp = findBridgeWords(G, word1, word2, num_word);
             String s = "";
 
+            //System.out.println(tmp.length);
             if (num_word[0] == 0) {
                 return "No bridge words from word1 to word2!";
             } else if (num_word[0] == 1) {
                 return "The bridge words from word1 to word2 are: " + tmp[0];
             } else {
-                for (int i = 0; i < (num_word[0] - 1); i++)
-                {
-                    s+= tmp[i] + ", ";
-                }
+                for (int i = 0; i < (num_word[0] - 1); i++) {
+					s = tmp[i] + ", ";
+				}
 
                 return "The bridge words from word1 to word2 are: " + s +
                 "and " + tmp[num_word[0] - 1] + ". ";
@@ -169,14 +168,14 @@ public class gui  {
     }
     static void DrawGraph(Graph G) {
         EdgeNode p = new EdgeNode();
-		GraphViz gViz=new GraphViz( "F:\\software\\Coding\\JAVA","C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe");
+		GraphViz gViz=new GraphViz("F:\\software\\Coding\\JAVA","C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe");
         gViz.start_graph();
         for (int i = 0; i < G.vertex_num; i++) {
 
             p = G.node_list[i].first_edge;
 
             while (p != null) {
-				gViz.addln(G.node_list[i].data +"->"+G.node_list[p.vertex].data+";");
+				gViz.addln(G.node_list[i].date +"->"+G.node_list[p.vertex].date+";");
                 p = p.next;
             }
         }
@@ -187,15 +186,13 @@ public class gui  {
             e.printStackTrace();
         }
     }
-
+    /** {@inheritDoc} */
     public static String generateNewText(Graph G, String inputText) {
         int[] arrays_length = { 0 };
         int num = 0;
         Random random = new Random();
         String s = "";
         String[] tmp = new String[G.vertex_num];
-        inputText= (inputText.replaceAll("[^A-Za-z., \n?!:;(){}\"\'-]","").replaceAll("[^A-Za-z]"," ").replaceAll(" +"," ")).trim();
-        inputText = inputText.toLowerCase();
         String[] inputText_split = (inputText.toLowerCase()).split("\\s+");
         num = inputText_split.length;
 
@@ -217,12 +214,12 @@ public class gui  {
         s += (inputText_split[inputText_split.length-1] + " ");
         return s;
     }
-
+    /** {@inheritDoc} */
     public static String randomWalk(Graph G) {
         Random random = new Random();
         int num = random.nextInt(G.vertex_num);
         int rand_num = 0 ,pre=num;
-        String s = G.node_list[num].data + " ";
+        String s = G.node_list[num].date + " ";
         String s1 = s;
         EdgeNode p = new EdgeNode();
         EdgeNode q = new EdgeNode();
@@ -237,7 +234,7 @@ public class gui  {
                 }
                 else
                 {
-                    s += G.node_list[p.vertex].data;
+                    s += G.node_list[p.vertex].date;
                      break;
                 }
             }
@@ -250,7 +247,7 @@ public class gui  {
                 }
                 pre=p.vertex;
                 p.flag = 1;
-                s += (G.node_list[p.vertex].data + " ");
+                s += (G.node_list[p.vertex].date + " ");
                 num = G.node_list[p.vertex].num_edge;
                 p = G.node_list[p.vertex].first_edge;
 
@@ -281,21 +278,22 @@ public class gui  {
         return s;
     }
 
-
+    /** {@inheritDoc} */
     public static String calcShortestPath(Graph G, String word1, String word2) {
         int max_num = 99;
         String s="";
         int[][] matraix = new int[G.vertex_num][G.vertex_num];
         int[][] tmp_matraix = new int[G.vertex_num + 1][G.vertex_num + 1];
 
-        for (int i = 0; i < G.vertex_num; i++)
-            for (int j = 0; j < G.vertex_num; j++) {
+        for (int i = 0; i < G.vertex_num; i++) {
+			for (int j = 0; j < G.vertex_num; j++) {
                 if (i == j) {
                     matraix[i][j] = 0;
                 } else {
                     matraix[i][j] = max_num;
                 }
             }
+		}
 
         EdgeNode p = new EdgeNode();
 
@@ -308,11 +306,12 @@ public class gui  {
             }
         }
 
-        for (int i = 0; i < G.vertex_num; i++)
-            for (int j = 0; j < G.vertex_num; j++)
+        for (int i = 0; i < G.vertex_num; i++) {
+			for (int j = 0; j < G.vertex_num; j++)
                 if (matraix[i][j] != max_num) {
                     tmp_matraix[i][j] = j;
                 }
+		}
 
 
         int[] Line = new int[G.vertex_num];
@@ -338,32 +337,30 @@ public class gui  {
             }
         }
         int next = tmp_matraix[v1][v2];
-        int num=matraix[v1][v2];
         String ss="";
         if (next == 0) {
             return "Unreachable!";
         } else {
-            s+=G.node_list[v1].data + " ->";
-            ss+=G.node_list[v1].data+" ";
+            s+=G.node_list[v1].date + " ->";
+            ss+=G.node_list[v1].date+" ";
             while (next != v2 ) {
-                s+=G.node_list[next].data + " ->";
-                ss+=G.node_list[next].data +" ";
+                s+=G.node_list[next].date + " ->";
+                ss+=G.node_list[next].date +" ";
                 next = tmp_matraix[next][v2];
             }
-            s+=G.node_list[v2].data ;
-            ss+=G.node_list[v2].data;
+            s+=G.node_list[v2].date ;
+            ss+=G.node_list[v2].date;
             String []s_tmp=ss.split("\\s+");
-            set_graph(G,s_tmp,num);
+            set_graph(G,s_tmp);
         }
 
         return s;
     }
-    public static void set_graph(Graph G,String []str_tmp,int num)
+    public static void set_graph(Graph G,String []str_tmp)
     {
         EdgeNode p=new EdgeNode();
         GraphViz gViz=new GraphViz( "F:\\software\\Coding\\JAVA","C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe","temp");
         gViz.start_graph();
-        gViz.addln(str_tmp[0]+"->"+str_tmp[str_tmp.length-1]+" [color=blue] "+"[label="+num+"]"+";");
         for(int i=0;i<str_tmp.length-1;i++)
         {
             gViz.addln(str_tmp[i]+"->"+str_tmp[i+1]+" [color=red]"+";");
@@ -372,7 +369,7 @@ public class gui  {
         for (int i = 0; i < G.vertex_num; i++) {
             p = G.node_list[i].first_edge;
             while (p != null) {
-                gViz.addln(G.node_list[i].data +"->"+G.node_list[p.vertex].data+";");
+                gViz.addln(G.node_list[i].date +"->"+G.node_list[p.vertex].date+";");
                 p = p.next;
             }
         }
@@ -385,8 +382,9 @@ public class gui  {
     }
     }
 }
+
 class VertexNode {
-    String data;
+    String date;
     int num_edge;
     EdgeNode first_edge = new EdgeNode();
 }
@@ -472,7 +470,7 @@ class GUIPanel extends JPanel implements ActionListener{
 		jf.setSize(500,500);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         a.setSize(490,300);
-        out2.setText("");
+        out2.setText("fdd");
         out2.setPreferredSize(a);
         out2.setAutoscrolls(true);
         out2.setLineWrap(true);   
@@ -496,7 +494,7 @@ class GUIPanel extends JPanel implements ActionListener{
 		scrollPane.setPreferredSize(new Dimension(350,240));
 		scrollPane.setAutoscrolls(true);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);	
 	};
 
     public void actionPerformed(ActionEvent event) {
@@ -525,7 +523,7 @@ class GUIPanel extends JPanel implements ActionListener{
                     for (int i = 0; i < f.length(); i++) {
                         gui.str1 += (char) b[i];
                     }
-                    gui.str1= (gui.str1.replaceAll("[^A-Za-z., \n?!:;(){}\"\'-]","").replaceAll("[^A-Za-z]"," ").replaceAll(" +"," ")).trim();
+                    gui.str1= (((gui.str1.replaceAll("[^\\w]|_", " ")).replaceAll("[\\d]","")) .replaceAll(" +", " ")).trim();
                     gui.str1 = gui.str1.toLowerCase();
                     GUIPanel.out1.setText(gui.str1); 
                     gui.count = (gui.str1).split("\\s+");
@@ -588,7 +586,7 @@ class GUIPanel extends JPanel implements ActionListener{
     	if(source == btn21) {
     		
     		File srcFile = new File(".\\temp.gif");
-    		byte b[]=new byte[(int)srcFile.length()]; 
+    		byte[] b=new byte[(int)srcFile.length()]; 
     		InputStream in;
 			try {
 				in = new FileInputStream(srcFile);
@@ -647,7 +645,6 @@ class GUIPanel extends JPanel implements ActionListener{
     	if(source == btn26 || source==btn27 || source==btn28) {
             if(source==btn26)
             {
-                GUIPanel.out2.setText("");
                 String random_path=gui.randomWalk(gui.G);
                 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();  
                 int width = 500;  
@@ -655,7 +652,6 @@ class GUIPanel extends JPanel implements ActionListener{
                  jf.setBounds((d.width - width) / 2, (d.height - height) / 2, width, height);
                 save_random=random_path;
                 jf.show();
-                counter=0;
                 
             }
             else if(source==btn27)
@@ -663,12 +659,13 @@ class GUIPanel extends JPanel implements ActionListener{
                 String []temp_random=save_random.split(" ");
                 String temp_rand="";
                 if(counter==temp_random.length)
-                {       
-                     JOptionPane.showMessageDialog(gui.frame,"That's all","warning",JOptionPane.INFORMATION_MESSAGE);
+                {
+                    counter=0;
+                    JOptionPane.showMessageDialog(gui.frame,"That's all","warning",JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
-                    for(int i=0;i<=counter;i++)
+                    for(int i=0;i<counter;i++)
                     {
                         temp_rand+=temp_random[i]+" ";
                      }
@@ -680,7 +677,7 @@ class GUIPanel extends JPanel implements ActionListener{
            {
             String []temp_random=save_random.split(" ");
             String temp_rand="";
-            for(int i=0;i<counter;i++)
+            for(int i=0;i<counter-1;i++)
             {
                 temp_rand+=temp_random[i]+" ";
             }
@@ -689,7 +686,7 @@ class GUIPanel extends JPanel implements ActionListener{
            }
         }
 
-}
+  }
 }
 class  GraphViz{
     private String runPath = "";
@@ -767,7 +764,4 @@ class  GraphViz{
         graph.append("}") ;
     }   
 }
-
-
-/*graph*/	
 

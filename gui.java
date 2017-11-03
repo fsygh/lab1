@@ -138,15 +138,19 @@ public class gui  {         /** {@inheritDoc} */
       int locate_word1 = locate_vex(G, word1);
       int locate_word2 = locate_vex(G, word2);
 
-        if ((locate_word1 == -1) || (locate_word2 == -1)) {
+        if ((locate_word1 == -1) || (locate_word2 == -1) || G.vertex_num==0 ) {
             if ((locate_word1 == -1) && (locate_word2 != -1)) {
                 return "No " + word1 + " in the graph!";
             } else if ((locate_word2 == -1) && (locate_word1 != -1)) {
-                return "No " + word1 + " in the graph!";
-            } else {
+                return "No " + word2 + " in the graph!";
+            }else if( G.vertex_num==0) {
+                return "The graph is emtpy!";
+                }
+            
+            else {
                 return "No " + word1 + " and " + word2 + " in the graph!";
             }
-        } else {
+        }else {
             int[] num_word = { 0 };
             String[] tmp = findBridgeWords(G, word1, word2, num_word);
             String s = "";

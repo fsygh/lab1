@@ -230,8 +230,7 @@ public class gui  {         /** {@inheritDoc} */
         p=G.node_list[num].first_edge;
         while (true ) 
         {
-            if (p == null || p.flag==1)
-             { 
+
                 if(p==null)
                 {
                       break;
@@ -241,28 +240,20 @@ public class gui  {         /** {@inheritDoc} */
                     s += G.node_list[p.vertex].date;
                      break;
                 }
-            }
-            else
-            {
-                rand_num = random.nextInt((G.node_list[pre]).num_edge);
-                for (int i = 0; i < rand_num; i++)
+                else
                 {
-                    p = p.next;
-                }
-                pre=p.vertex;
-                p.flag = 1;
-                s += (G.node_list[p.vertex].date + " ");
-                num = G.node_list[p.vertex].num_edge;
-                p = G.node_list[p.vertex].first_edge;
+                    rand_num = random.nextInt((G.node_list[pre]).num_edge);
+                    for (int i = 0; i < rand_num; i++)
+                    {
+                        p = p.next;
+                    }
+                    pre=p.vertex;
+                    p.flag = 1;
+                    s += (G.node_list[p.vertex].date + " ");
+                    num = G.node_list[p.vertex].num_edge;
+                    p = G.node_list[p.vertex].first_edge;
 
-            }
-        }
-        for (int i = 0; i < G.vertex_num; i++) {
-            q = G.node_list[i].first_edge;
-            while (q != null) {
-                q.flag=0;
-                q = q.next;
-            }
+                }
         }
         try{
           File f = new File("F:\\software\\Coding\\JAVA\\rewrite_txt.txt");

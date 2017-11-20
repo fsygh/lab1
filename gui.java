@@ -230,15 +230,9 @@ public class gui  {         /** {@inheritDoc} */
         p=G.node_list[num].first_edge;
         while (true ) 
         {
-
                 if(p==null)
                 {
                       break;
-                }
-                else
-                {
-                    s += G.node_list[p.vertex].date;
-                     break;
                 }
                 else
                 {
@@ -252,7 +246,11 @@ public class gui  {         /** {@inheritDoc} */
                     s += (G.node_list[p.vertex].date + " ");
                     num = G.node_list[p.vertex].num_edge;
                     p = G.node_list[p.vertex].first_edge;
-
+                    if( p.flag==1)
+                    {
+                        s += G.node_list[p.vertex].date;
+                         break;
+                    }
                 }
         }
         try{
